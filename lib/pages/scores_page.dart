@@ -8,12 +8,12 @@ import 'package:flutter/material.dart';
 
 //REPLACE MOCKED DATA WITH ACTUAL IMAGE
 class ScorePage extends StatefulWidget {
-  // final XFile imageFile;
+  final XFile imageFile;
   final ImageScoreModel imageScore;
 
   const ScorePage({
     super.key,
-    // required this.imageFile,
+    required this.imageFile,
     required this.imageScore,
   });
 
@@ -56,7 +56,7 @@ class _ScorePageState extends State<ScorePage> {
                 children: [
                   const SizedBox(height: 20),
                   Text(
-                    '${mockData.score} Points',
+                    '${widget.imageScore.score} Points',
                     style: const TextStyle(
                       fontSize: 48,
                       fontWeight: FontWeight.bold,
@@ -73,7 +73,7 @@ class _ScorePageState extends State<ScorePage> {
                     ),
                   ),
                   const SizedBox(height: 10),
-                  ...mockData.cardNames.map((cardName) {
+                  ...widget.imageScore.cardNames.map((cardName) {
                     return Text(
                       cardName,
                       style: const TextStyle(
@@ -92,7 +92,7 @@ class _ScorePageState extends State<ScorePage> {
                     ),
                   ),
                   const SizedBox(height: 10),
-                  ...mockData.scoreDetails.map((detail) {
+                  ...widget.imageScore.scoreDetails.map((detail) {
                     return Text(
                       detail,
                       style: const TextStyle(
@@ -102,13 +102,6 @@ class _ScorePageState extends State<ScorePage> {
                     );
                   }).toList(),
                   const SizedBox(height: 40),
-                  ElevatedButton(
-                    onPressed: () {},
-                    child: const Text(
-                      'Edit',
-                      style: TextStyle(fontSize: 18),
-                    ),
-                  ),
                 ],
               ),
             ),

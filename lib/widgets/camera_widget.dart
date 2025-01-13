@@ -39,17 +39,7 @@ class _CameraState extends State<CameraWidget> {
             padding: const EdgeInsets.only(bottom: 16.0),
             child: FloatingActionButton(
               onPressed: () {
-                //_takePicture();
-                final mockData = ImageScoreModel.fromJson(data);
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => ScorePage(
-                      // imageFile: widget.imageFile!,
-                      imageScore: mockData,
-                    ),
-                  ),
-                );
+                _takePicture();
               },
               backgroundColor: Colors.white,
               foregroundColor: Colors.deepPurple,
@@ -70,7 +60,7 @@ class _CameraState extends State<CameraWidget> {
       setState(() {
         widget.imageFile = picture;
       });
-      final mockData = ImageScoreModel.fromJson(data);
+      //final mockData = ImageScoreModel.fromJson(data);
       final imageScore = await scoreService.fetchScore(File(picture.path));
 
       if (!mounted) return;
@@ -79,7 +69,8 @@ class _CameraState extends State<CameraWidget> {
         context,
         MaterialPageRoute(
           builder: (context) => ScorePage(
-            imageScore: mockData,
+            imageFile: widget.imageFile!,
+            imageScore: imageScore,
           ),
         ),
       );

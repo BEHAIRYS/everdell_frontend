@@ -10,9 +10,8 @@ class ScoreService {
 
   Future<ImageScoreModel> fetchScore(File imageFile) async {
     try {
-      final url = Uri.parse('$baseUrl/api/score');
+      final url = Uri.parse('$baseUrl/calculate-image-score/');
       final request = http.MultipartRequest('POST', url);
-
       request.files.add(
         await http.MultipartFile.fromPath(
           'image',
@@ -30,19 +29,6 @@ class ScoreService {
       }
     } catch (e) {
       throw Exception('Error uploading image: $e');
-    }
-  }
-
-  Future<void> editScore(Map<String, dynamic> data) async {
-    final url = Uri.parse('$baseUrl/api/data');
-    final response = await http.post(
-      url,
-      headers: {'Content-Type': 'application/json'},
-      body: jsonEncode(data),
-    );
-
-    if (response.statusCode != 200) {
-      throw Exception('Failed to post data');
     }
   }
 }
