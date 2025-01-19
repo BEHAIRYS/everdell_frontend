@@ -62,18 +62,45 @@ class _ScorePageState extends State<ScorePage> {
                     Text('${widget.imageScore.score} Points',
                         style: Theme.of(context).textTheme.bodyLarge),
                     const SizedBox(height: 20),
-                    Text('Cards Detected:',
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text('Cards',
+                                style: Theme.of(context).textTheme.bodyLarge),
+                            const SizedBox(height: 10),
+                            ...widget.imageScore.cardNames!.map((cardName) {
+                              return Text(cardName,
+                                  style:
+                                      Theme.of(context).textTheme.bodyMedium);
+                            }).toList(),
+                            const SizedBox(height: 20),
+                          ],
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            Text('Others',
+                                style: Theme.of(context).textTheme.bodyLarge),
+                            const SizedBox(height: 10),
+                            ...widget.imageScore.others!.entries.map((entry) {
+                              return Text(
+                                '${entry.key}: ${entry.value} occurences',
+                                style: Theme.of(context).textTheme.bodyMedium,
+                              );
+                            }).toList(),
+                            const SizedBox(height: 20),
+                          ],
+                        ),
+                      ],
+                    ),
+                    Text('Score Details',
                         style: Theme.of(context).textTheme.bodyLarge),
                     const SizedBox(height: 10),
-                    ...widget.imageScore.cardNames.map((cardName) {
-                      return Text(cardName,
-                          style: Theme.of(context).textTheme.bodyMedium);
-                    }).toList(),
-                    const SizedBox(height: 20),
-                    Text('Score Details:',
-                        style: Theme.of(context).textTheme.bodyLarge),
-                    const SizedBox(height: 10),
-                    ...widget.imageScore.scoreDetails.map((detail) {
+                    ...widget.imageScore.scoreDetails!.map((detail) {
                       return Text(detail,
                           style: Theme.of(context).textTheme.bodyMedium);
                     }).toList(),

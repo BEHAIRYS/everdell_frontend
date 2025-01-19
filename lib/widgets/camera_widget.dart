@@ -64,7 +64,6 @@ class _CameraState extends State<CameraWidget> {
       final tempFile = File('${tempDir.path}/cityTest.jpg');
       await tempFile.writeAsBytes(bytes);
 
-      // Use the temporary file as an XFile
       final XFile mockedImage = XFile(tempFile.path);
 */
       if (!mounted) return;
