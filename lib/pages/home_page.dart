@@ -61,34 +61,72 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        title: Text(widget.title),
+        title:
+            Text(widget.title, style: Theme.of(context).textTheme.titleLarge),
+        centerTitle: true,
       ),
-      body: Stack(children: [
-        Image.asset(
-          'assets/images/everdell-bg.jpg',
-          fit: BoxFit.cover,
-          width: double.infinity,
-          height: double.infinity,
-        ),
-        Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                'Take a picture of your city to calculate your score',
-                style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                      color: Colors.black, // Override text color for visibility
-                    ),
-              ),
-              if (_isCameraInitialized)
-                Container(
-                    decoration: const BoxDecoration(color: Colors.black12),
-                    child: CameraWidget(
-                        controller: controller, imageFile: imageFile)),
-            ],
+      extendBodyBehindAppBar: true,
+      body: Stack(
+        children: [
+          Image.asset(
+            'assets/images/everdell-bg.jpg',
+            fit: BoxFit.cover,
+            width: double.infinity,
+            height: double.infinity,
           ),
-        ),
-      ]),
+          Center(
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const SizedBox(height: 100),
+                  if (_isCameraInitialized)
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 5),
+                      child: SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.75,
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: Colors.black.withOpacity(0.5),
+                            borderRadius: BorderRadius.circular(20),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black.withOpacity(0.3),
+                                blurRadius: 10,
+                                spreadRadius: 5,
+                              ),
+                            ],
+                          ),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(15),
+                            child: CameraWidget(
+                              controller: controller,
+                              imageFile: imageFile,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  const SizedBox(height: 10),
+                  const Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 20),
+                    child: Text(
+                      'Take a picture of your city to calculate your score',
+                      style: TextStyle(
+                        fontFamily: 'ArgosRegular',
+                        color: Colors.white,
+                        fontSize: 26,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

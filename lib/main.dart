@@ -9,9 +9,18 @@ final myTheme = ThemeData(
   colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
   useMaterial3: true,
   textTheme: const TextTheme(
-    bodyLarge: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-    bodyMedium: TextStyle(fontSize: 16, color: Colors.black87),
-    titleLarge: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+    bodyLarge: TextStyle(
+        fontFamily: 'ArgosGeorgeContour',
+        color: Colors.white,
+        fontSize: 24,
+        fontWeight: FontWeight.bold),
+    bodyMedium: TextStyle(
+        fontFamily: 'ArgosRegular', fontSize: 20, color: Colors.white),
+    titleLarge: TextStyle(
+        color: Colors.white,
+        fontSize: 22,
+        fontWeight: FontWeight.bold,
+        fontFamily: 'ArgosGeorgeContour'),
   ),
 );
 Future<void> main() async {

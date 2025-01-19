@@ -1,12 +1,10 @@
 import 'dart:io';
 import 'dart:ui';
-
 import 'package:camera/camera.dart';
 import 'package:everdell_frontend/data/data.dart';
 import 'package:everdell_frontend/model/score.dart';
 import 'package:flutter/material.dart';
 
-//REPLACE MOCKED DATA WITH ACTUAL IMAGE
 class ScorePage extends StatefulWidget {
   final XFile imageFile;
   final ImageScoreModel imageScore;
@@ -23,11 +21,16 @@ class ScorePage extends StatefulWidget {
 
 class _ScorePageState extends State<ScorePage> {
   ImageScoreModel mockData = ImageScoreModel.fromJson(data);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Score Page'),
+        centerTitle: true,
+        title: Text(
+          'Score Page',
+          style: Theme.of(context).textTheme.titleLarge,
+        ),
         backgroundColor: Colors.transparent,
         elevation: 0,
       ),
@@ -35,9 +38,9 @@ class _ScorePageState extends State<ScorePage> {
       body: Stack(
         children: [
           Positioned.fill(
-            child: Image.asset(
-              'assets/images/everdell-bg.jpg',
+            child: Image.file(
               fit: BoxFit.cover,
+              File(widget.imageFile.path),
             ),
           ),
           Positioned.fill(
@@ -49,60 +52,34 @@ class _ScorePageState extends State<ScorePage> {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(top: 50.0),
+            padding: const EdgeInsets.only(top: 100.0),
             child: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const SizedBox(height: 20),
-                  Text(
-                    '${widget.imageScore.score} Points',
-                    style: const TextStyle(
-                      fontSize: 48,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                    ),
-                  ),
-                  const SizedBox(height: 20),
-                  Text(
-                    'Cards Detected:',
-                    style: TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white.withOpacity(0.8),
-                    ),
-                  ),
-                  const SizedBox(height: 10),
-                  ...widget.imageScore.cardNames.map((cardName) {
-                    return Text(
-                      cardName,
-                      style: const TextStyle(
-                        fontSize: 18,
-                        color: Colors.white,
-                      ),
-                    );
-                  }).toList(),
-                  const SizedBox(height: 20),
-                  Text(
-                    'Score Details:',
-                    style: TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white.withOpacity(0.8),
-                    ),
-                  ),
-                  const SizedBox(height: 10),
-                  ...widget.imageScore.scoreDetails.map((detail) {
-                    return Text(
-                      detail,
-                      style: const TextStyle(
-                        fontSize: 18,
-                        color: Colors.white,
-                      ),
-                    );
-                  }).toList(),
-                  const SizedBox(height: 40),
-                ],
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const SizedBox(height: 20),
+                    Text('${widget.imageScore.score} Points',
+                        style: Theme.of(context).textTheme.bodyLarge),
+                    const SizedBox(height: 20),
+                    Text('Cards Detected:',
+                        style: Theme.of(context).textTheme.bodyLarge),
+                    const SizedBox(height: 10),
+                    ...widget.imageScore.cardNames.map((cardName) {
+                      return Text(cardName,
+                          style: Theme.of(context).textTheme.bodyMedium);
+                    }).toList(),
+                    const SizedBox(height: 20),
+                    Text('Score Details:',
+                        style: Theme.of(context).textTheme.bodyLarge),
+                    const SizedBox(height: 10),
+                    ...widget.imageScore.scoreDetails.map((detail) {
+                      return Text(detail,
+                          style: Theme.of(context).textTheme.bodyMedium);
+                    }).toList(),
+                    const SizedBox(height: 40),
+                  ],
+                ),
               ),
             ),
           ),

@@ -62,10 +62,17 @@ flutter:
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
-  
+  fonts:
+    - family: ArgosGeorgeContour
+      fonts:
+        - asset: assets/fonts/ArgosGeorgeContour.ttf
+    - family: ArgosRegular
+      fonts:
+        - asset: assets/fonts/ArgosGeorge.ttf
   uses-material-design: true
   assets :
   - assets/images/everdell-bg.jpg
+  - assets/images/cityTest.jpg
 
   # To add assets to your application, add an assets section, like this:
   # assets:
